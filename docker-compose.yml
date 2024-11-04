@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  smack-postgres:
+    image: postgres:15
+    container_name: smack-postgres
+    environment:
+      - POSTGRES_USER=smack
+      - POSTGRES_PASSWORD=smack
+      - POSTGRES_DB=smack
+    ports:
+      - "3000:5432"

@@ -1,0 +1,15 @@
+authorization:
+  enabled: false
+  url: ""
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:3000/smack
+    username: smack
+    password: smack
+  jpa:
+    hibernate:
+      ddl-auto: create-drop # In production should not be set.
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
