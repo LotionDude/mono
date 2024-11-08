@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
-public class PostCreateRequest {
+public class PostEditRequest {
     private final String title;
     private final String markdownBody;
     private final List<String> tags;
