@@ -1,4 +1,4 @@
-package org.smack.mono.domain.posts.entity;
+package org.smack.mono.domain.comments.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicUpdate;
-import org.smack.mono.domain.comments.entity.Comment;
+import org.smack.mono.domain.posts.entity.Post;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -19,19 +19,16 @@ import java.util.List;
 @DynamicUpdate
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "posts")
-public class Post {
+@Table(name = "comments")
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(nullable = false)
-    private String title;
-
-    @Column(nullable = false, length = 30000)
+    @Column(nullable = false, length = 600)
     private String markdownBody;
 
-    @Column(nullable = false, length = 30000)
+    @Column(nullable = false, length = 600)
     private String plainBody;
 
     @Column(nullable = false, updatable = false)
@@ -51,9 +48,14 @@ public class Post {
     @Column
     private ZonedDateTime deletedAt;
 
-    @ElementCollection
-    private List<String> tags;
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private Post post;
 
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Comment parentComment;
+
+    @OneToMany(mappedBy = "parentComment", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 }

@@ -2,7 +2,6 @@ package org.smack.mono.domain.posts;
 
 import lombok.RequiredArgsConstructor;
 import org.smack.mono.common.services.MarkdownService;
-import org.smack.mono.domain.authorization.AuthorizationService;
 import org.smack.mono.domain.posts.entity.Post;
 import org.smack.mono.domain.posts.entity.PostJpaRepository;
 import org.smack.mono.domain.posts.exceptions.PostNotFoundException;
@@ -31,6 +30,7 @@ public class PostService {
                 .tags(Optional.ofNullable(request.getTags()).orElse(Collections.emptyList()))
                 .author(user)
                 .isDeleted(false)
+                .isApproved(false)
                 .createdAt(ZonedDateTime.now())
                 .build();
 
