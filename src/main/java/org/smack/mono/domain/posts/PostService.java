@@ -42,14 +42,14 @@ public class PostService {
     public Post editPost(PostEditRequest request, Long id) {
         Post post = this.getPostById(id);
 
-        Optional.ofNullable(request.getTitle()).ifPresent(post::setTitle);
-        Optional.ofNullable(request.getTags()).ifPresent(post::setTags);
-        Optional.ofNullable(request.getMarkdownBody()).ifPresent(markdownBody -> {
-            String plainBody = this.markdownService.getPlainTextFromMarkdown(markdownBody);
+        if (request.getTitle() != null) post.setTitle(request.getTitle());
+        if (request.getTags() != null) post.setTags(request.getTags());
+        if (request.getMarkdownBody() != null) {
+            String plainBody = this.markdownService.getPlainTextFromMarkdown(request.getMarkdownBody());
 
-            post.setMarkdownBody(markdownBody);
+            post.setMarkdownBody(request.getMarkdownBody());
             post.setPlainBody(plainBody);
-        });
+        }
 
         return this.postJpaRepository.save(post);
     }
