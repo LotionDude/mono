@@ -6,6 +6,7 @@ import org.smack.mono.domain.posts.entity.Post;
 import org.smack.mono.domain.posts.entity.PostJpaRepository;
 import org.smack.mono.domain.posts.exceptions.PostNotFoundException;
 import org.smack.mono.domain.posts.presentation.request.PostCreateRequest;
+import org.smack.mono.domain.posts.presentation.request.PostEditRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +39,7 @@ public class PostService {
     }
 
     @Transactional
-    public Post editPost(PostCreateRequest request, Long id) {
+    public Post editPost(PostEditRequest request, Long id) {
         Post post = this.getPostById(id);
 
         Optional.ofNullable(request.getTitle()).ifPresent(post::setTitle);
