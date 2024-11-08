@@ -1,6 +1,12 @@
 authorization:
   enabled: false
-  url: ""
+  service-name: "authorization-server"
+  connection:
+    url: "http://localhost:8090/api/v1/authorize"
+    read-timeout: "5s"
+    connect-timeout: "5s"
+    max-attempts: 3
+
 
 spring:
   datasource:

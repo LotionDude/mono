@@ -8,7 +8,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @RequiredArgsConstructor
 @ConfigurationProperties("authorization")
 public class AuthorizationConfiguration {
-    private final String url;
+    private final String serviceName;
+    private final ConnectionConfiguration connection;
 
     /**
      * Should the authorization server be called? When disabled, will authorize all requests.

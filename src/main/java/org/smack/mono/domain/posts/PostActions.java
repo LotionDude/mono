@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.smack.mono.domain.authorization.AuthorizationAction;
 
 @RequiredArgsConstructor
-@Getter(onMethod_ = @__(@Override))
 public enum PostActions implements AuthorizationAction {
     CREATE("create"),
     DELETE("delete"),
@@ -14,5 +13,6 @@ public enum PostActions implements AuthorizationAction {
     UPVOTE("upvote");
 
     @JsonValue
+    @Getter(onMethod_ = @Override)
     private final String name;
 }

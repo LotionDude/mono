@@ -1,11 +1,12 @@
 package org.smack.mono.domain.authorization.response;
 
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.NonNull;
 
-@Getter
-@RequiredArgsConstructor
+@Data
+@RequiredArgsConstructor(onConstructor_ = @JsonCreator)
 public class AuthResponse {
     @NonNull
     private final Boolean result;
