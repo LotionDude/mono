@@ -7,6 +7,7 @@ import org.smack.mono.domain.authorization.AuthorizationService;
 import org.smack.mono.domain.authorization.request.AuthRequest;
 import org.smack.mono.domain.posts.entity.Post;
 import org.smack.mono.domain.posts.presentation.request.PostCreateRequest;
+import org.smack.mono.domain.posts.presentation.request.PostEditRequest;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,7 +27,7 @@ public class PostController {
 
     //TODO: Don't return Post. Return a custom response object.
     @PatchMapping("/{id}")
-    public Post editPost(@RequestBody PostCreateRequest request, @RequestHeader(HeaderConstants.USER_ID) String user, @PathVariable("id") Long id) {
+    public Post editPost(@RequestBody PostEditRequest request, @RequestHeader(HeaderConstants.USER_ID) String user, @PathVariable("id") Long id) {
         this.authService.authorizeRequest(new AuthRequest(user, PostActions.EDIT, ResourceType.POST, this.postService.getPostAuthor(id)));
 
         return this.postService.editPost(request, id);
